@@ -30,25 +30,32 @@ function startGame() {
     let guessedCorrectly = false;
 
     while (attempts < maxAttempts) {
-        let userGuess = parseInt(prompt(`Guess a number between 1 and ${maxNumber} (${maxAttempts - attempts} attempts left)`));
+        let userGuess = prompt(`Guess a number between 1 and ${maxNumber} (${maxAttempts - attempts} attempts left)`);
 
-        if (isNaN(userGuess) || userGuess < 1 || userGuess > maxNumber) {
-            alert("Please enter a valid number.");
-            continue;
-            //continue here ensures that the user is given another chance to enter a number
-            //without incrementing the attempts.
-        }
-
-        attempts++;
-
-        if (userGuess === randomNumber) {
-            alert(`Congratulations! You found the number ${randomNumber} in ${attempts} attempts.`);
-            guessedCorrectly = true;
-            break;
-        } else if (userGuess < randomNumber) {
-            alert("Too low! Try again.");
+        
+        if (userGuess === null) {
+            alert("Game over!");
+            return;
         } else {
-            alert("Too high! Try again.");
+            userGuess = parseInt(userGuess);
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > maxNumber) {
+                alert("Please enter a valid number.");
+                continue;
+                //continue here ensures that the user is given another chance to enter a number
+                //without incrementing the attempts.
+            }
+
+            attempts++;
+
+            if (userGuess === randomNumber) {
+                alert(`Congratulations! You found the number ${randomNumber} in ${attempts} attempts.`);
+                guessedCorrectly = true;
+                break;
+            } else if (userGuess < randomNumber) {
+                alert("Too low! Try again.");
+            } else {
+                alert("Too high! Try again.");
+            }
         }
     }
 
